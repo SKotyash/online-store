@@ -1,0 +1,57 @@
+<link rel="stylesheet" href="{{ url_for('static',filename='css/style.css')}}">
+{%extends 'base.html'%}
+{% block title %}
+Cart
+{% endblock %}
+{% block content %}
+<div class="cart-container">
+    <h1 class="cart-title">Your cart</h1>
+
+    <div class="cart-content">
+
+        <div class="cart-items">
+            {% block products %}
+            {%for item in products%}
+            <div class="cart-item">
+                <img src="{{ url_for('static', filename='uploads/' + item.image) }}" alt="Product">
+                <div class="item-details">
+                    <h3>{{item.name}}</h3>
+                    <p class="item-price">{{item.price}} USD</p>
+                </div>
+                <form action ="{{ url_for('remove', product_id=item.id) }}">
+                    <button class="btn-remove">&times;</button>
+                </form>
+
+            </div>
+            {% endfor %}
+            {% endblock %}
+
+        </div>
+        <div class="cart-summary">
+            <h3>Order:</h3>
+            <div class="summary-line">
+                <span>Products: {{products|length}}</span>
+                <span>{{total}} USD</span>
+            </div>
+            <div class="summary-line">
+                <span>Delivery:</span>
+                <span>Free</span>
+            </div>
+            <div class="summary-line total">
+                <span>Total:</span>
+                <span >{{total}} USD</span>
+            </div>
+            {%if products|length>0%}
+            <a href="{{ url_for('checkout')}}">
+                <button class="btn-checkout">Continue to checkout</button>
+            </a>
+            {%else%}
+            <button class="btn-checkout" style="background:grey" disabled>Your cart is empty</button>
+            {%endif%}
+
+            <a href="{{ url_for('index') }}" class="back-link">Back to store</a>
+        </div>
+    </div>
+</div>
+
+{%endblock%}

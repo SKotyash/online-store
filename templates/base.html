@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Store</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css')}}">
+</head>
+<body>
+    <header class="container d-flex flex-wrap align-items-center justify-content-between py-3 mb-4 border-bottom">
+    <!-- Ліва частина: Лого та Store -->
+    <div class="d-flex align-items-center">
+        <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none me-3">
+            <svg class="bi" width="40" height="32" role="img" aria-label="Bootstrap">
+                <use xlink:href="#bootstrap"></use>
+            </svg>
+        </a>
+
+        <ul class="nav">
+            <li>
+                <a href="{{ url_for('index') }}"
+                   class="nav-link px-2 {{ 'text-secondary' if request.endpoint == 'index' else 'link-primary' }}">
+                   Store
+                </a>
+            </li>
+        </ul>
+        {% if session.get('user_id')=='admin'%}
+        <ul class="nav">
+            <li>
+                <a href="{{ url_for('adminpanel') }}"
+                   class="nav-link px-2 {{ 'text-secondary' if request.endpoint == 'adminpanel' else 'link-primary' }}">
+                   Add products
+                </a>
+            </li>
+        </ul>
+        <ul class="nav">
+            <li>
+                <a href="{{ url_for('clientsorders') }}"
+                   class="nav-link px-2 {{ 'text-secondary' if request.endpoint == 'clientsorders' else 'link-primary' }}">
+                   Clients orders
+                </a>
+            </li>
+        </ul>
+        {%endif%}
+    </div>
+
+    <!-- Права частина: Cart та Кнопки (Login/Logout) -->
+    <div class="col-md-4 text-end d-flex align-items-center justify-content-end">
+
+
+        {% if session.get('user_id') %}
+            <ul class="nav me-3">
+                <li>
+                    <a href="{{ url_for('history') }}"
+                       class="nav-link px-2 {{ 'text-secondary' if request.endpoint == 'history' else 'link-primary' }}">
+                       My orders
+                    </a>
+                </li>
+            </ul>
+        <ul class="nav me-3">
+            {%if session.get('cart')|length>0%}
+                <li>
+                    <a href="{{ url_for('cart') }}"
+                       class="nav-link px-2 {{ 'text-secondary' if request.endpoint == 'cart' else 'link-primary' }}">
+                       Cart({{session.get('cart')|length}})
+                    </a>
+                </li>
+            {%else%}
+                <li>
+                    <a href="{{ url_for('cart') }}"
+                       class="nav-link px-2 {{ 'text-secondary' if request.endpoint == 'cart' else 'link-primary' }}">
+                       Cart
+                    </a>
+                </li>
+            {%endif%}
+            </ul>
+
+            <a href="{{ url_for('logout') }}" class="text-decoration-none">
+                <button type="button" class="btn btn-outline-primary">Logout</button>
+            </a>
+        {% else %}
+            <div class="btn-group">
+                <a href="{{ url_for('login') }}" class="text-decoration-none me-2">
+                    <button type="button" class="btn btn-outline-primary">Login</button>
+                </a>
+                <a href="{{ url_for('register') }}" class="text-decoration-none">
+                    <button type="button" class="btn btn-primary">Sign-up</button>
+                </a>
+            </div>
+        {% endif %}
+    </div>
+</header>
+    <div class="content flex-grow-1">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      <div class="alert alert-{{ category }}">
+        {{ message }}
+      </div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+        {% block content %} {% endblock %}
+    </div>
+</body>
+
+</html>

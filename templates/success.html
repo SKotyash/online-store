@@ -1,0 +1,12 @@
+{%extends 'base.html' %}
+{% block title %}
+Order is success
+{% endblock %}
+{% block content %}
+<div class="bg-body-tertiary p-5 rounded mt-3">
+    <h1>Your order is succesfull</h1>
+    <p class="lead">You can find it in order history</p>
+    <a class="btn btn-lg btn-primary" href="{{ url_for('history') }}" role="button">View history»</a>
+    <a href="{{ url_for('index') }}" class="back-link" style="text-align: left;">Back to store</a>
+</div>
+{%endblock%}

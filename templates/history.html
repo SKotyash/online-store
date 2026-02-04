@@ -1,0 +1,44 @@
+{% extends 'base.html'%}
+{% block title %}
+Orders history
+{% endblock %}
+{% block content %}
+<body>
+    <div class="orders-container">
+        <header class="orders-header">
+            <h1>My orders</h1>
+            <a href="/" class="back-link">Back to store</a>
+        </header>
+{% if order_history%}
+        <div class="orders-table-wrapper">
+            <table class="orders-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Date</th>
+                        <th>Products</th>
+                        <th>Total</th>
+                        <th>Email</th>
+                        <th>Personal data</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for item in order_history%}
+                    <tr>
+                        <td class="order-id">{{item.id}}</td>
+                        <td class="order-date">{{item.date.strftime('%d.%m.%Y %H:%M') }}</td>
+                        <td class="order-products">{{item.products}}</td>
+                        <td class="order-total">{{item.total_price}} USD</td>
+                        <td class="order-mail">{{item.mail}}</td>
+                        <td class="order-personal">{{item.personal_data}}</td>
+                    </tr>
+                {%endfor%}
+                </tbody>
+            </table>
+        </div>
+        {%else%}
+        <h2>You have no orders yet</h2>
+        {%endif%}
+    </div>
+</body>
+{%endblock%}

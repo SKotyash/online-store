@@ -1,0 +1,57 @@
+
+{%extends 'base.html'%}
+{% block title %}
+Confirm order
+{% endblock %}
+{% block content %}
+<div class="cart-container">
+    <h1 class="cart-title">Your order</h1>
+
+    <div class="checkout-layout">
+
+        <div class="checkout-card">
+            <div class="cart-summary checkout-card">
+            <h3>Order:
+                {%for item in products%}
+                {{item.name}}{% if not loop.last %}, {% endif %}
+                {%endfor%}
+            </h3>
+            <div class="summary-line">
+                <span>Products: {{products|length}}</span>
+                <span>{{total}} USD</span>
+            </div>
+            <div class="summary-line">
+                <span>Delivery:</span>
+                <span>Free</span>
+            </div>
+            <div class="summary-line total">
+                <span>Total:</span>
+                <span>{{total}} USD</span>
+            </div>
+
+        </div>
+
+
+            <form action="{{ url_for('checkout') }}" method="POST" class="form-body">
+                <div class="form-group">
+                    <label for="first_name">Name:</label>
+                    <input type="text" id="first_name" name="first_name" placeholder="Enter your name" required>
+                </div>
+                <div class="form-group">
+                    <label for="last_name">Last name</label>
+                    <input type="text" id="last_name" name="last_name" placeholder="Enter your last name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Your email:</label>
+                    <input type="email" id="email" name="email" placeholder="email@example.com" required>
+                </div>
+
+                <button type="submit" class="btn-checkout">Checkout</button>
+</form>
+            <a href="{{ url_for('index') }}" class="back-link">Back to store</a>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

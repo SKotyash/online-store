@@ -1,0 +1,411 @@
+/* --- Стили, специфичные для Bootstrap-хедерa (опционально, если не хватает стандартных) --- */
+.link-blue {
+    color: #007bff; /* Цвет ссылок, если не активны */
+}
+
+.link-blue:hover {
+    color: #0056b3;
+}
+
+
+/* --- Ваши существующие стили (без изменений) --- */
+
+.auth-container { font-family: sans-serif; max-width: 300px; margin: 50px auto; }
+.auth-form { display: flex; flex-direction: column; gap: 10px; padding: 20px; border: 1px solid #ccc; border-radius: 8px; }
+input { padding: 8px; border: 1px solid #ddd; border-radius: 4px; }
+button { padding: 10px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; }
+
+/* Логіка перемикання */
+#auth-toggle { display: none; }
+.reg-field, .reg-title { display: none; }
+
+#auth-toggle:checked ~ .auth-form .reg-field { display: block; }
+#auth-toggle:checked ~ .auth-form .reg-title { display: block; }
+#auth-toggle:checked ~ .auth-form .login-title { display: none; }
+
+.toggle-label { font-size: 0.8em; color: #007bff; cursor: pointer; text-align: center; margin-top: 10px; }
+
+/* --- Загальні стилі Body (прибираємо конфлікти з минулих відповідей) --- */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f7f6; /* Легкий сірий фон */
+    margin: 0;
+    padding: 20px;
+    color: #333;
+}
+
+/* --- Оновлені стилі для списку товарів (Store Page) --- */
+
+.product-list {
+    display: grid;
+    /* Створює адаптивну сітку: 4 колонки на великих екранах, зменшується до 250px мінімум */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px; /* Більший відступ між картками */
+    padding: 0;
+    max-width: 1200px;
+    margin: 0 auto; /* Центруємо список на сторінці */
+}
+
+.product-card {
+    display: flex;
+    flex-direction: column; /* Вирівнює вміст по вертикалі */
+    justify-content: space-between; /* Розтягує контент, щоб всі картки були однакової висоти */
+
+    background: #ffffff; /* Білий фон, як на макеті */
+    border: 1px solid #e0e0e0;
+    padding: 20px;
+    text-align: center;
+    border-radius: 12px; /* Більш м'які кути */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    transform: translateY(-3px);
+}
+
+.product-card img {
+    max-width: 100%;
+    height: auto;
+    object-fit: contain; /* Зберігає пропорції зображення */
+    margin-bottom: 15px;
+    /* Можна задати фіксовану висоту, якщо всі зображення однакового типу, наприклад: */
+    /* height: 200px; */
+}
+
+.product-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color: #2c3e50;
+}
+
+.product-description {
+    font-size: 0.9rem;
+    color: #7f8c8d;
+    margin-bottom: 15px;
+    /* Це важливо, щоб опис не займав різну висоту в різних картках, якщо він дуже довгий */
+    /* overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Обрізати після 3 рядків */
+    /* -webkit-box-orient: vertical; */
+}
+
+.price {
+    font-weight: bold;
+    color: #27ae60; /* Зелений колір для ціни */
+    margin-top: auto; /* Притискає ціну та кнопки до низу картки */
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+}
+
+/* Стилі для кнопок (якщо ви використовуєте класи Bootstrap у своєму HTML) */
+.btn {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    margin-top: 10px;
+    width: 100%; /* Кнопки займають всю ширину картки */
+}
+
+.btn-primary { background: #007bff; color: white; }
+.btn-secondary { background: #6c757d; color: white; opacity: 0.7; cursor: not-allowed; }
+.btn-danger { background: #dc3545; color: white; }
+
+.cart-container {
+    max-width: 1000px;
+    margin: 50px auto;
+    padding: 0 20px;
+}
+
+.cart-title {
+    font-size: 2rem;
+    margin-bottom: 30px;
+}
+
+.cart-content {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+}
+
+/* Список товаров */
+.cart-items {
+    flex: 1;
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.cart-item img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-right: 20px;
+}
+
+.item-details {
+    flex-grow: 1;
+}
+
+.item-details h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    color: #2d3436;
+}
+
+.item-price {
+    margin-top: 8px;
+    font-weight: bold;
+    color: #00b894;
+}
+
+/* Кнопка удаления */
+.btn-remove {
+    background: #fab1a0;
+    color: #d63031;
+    border: none;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 20px;
+    transition: 0.3s;
+     display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-remove:hover {
+    background: #d63031;
+    color: #fff;
+     display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Итоговая панель */
+.cart-summary {
+    width: 350px;
+    background: #fff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+.cart-summary h3 {
+    margin-top: 0;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 15px;
+}
+
+.summary-line {
+    display: flex;
+    justify-content: space-between;
+    margin: 15px 0;
+    color: #636e72;
+}
+
+.total {
+    border-top: 2px solid #eee;
+    padding-top: 15px;
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #2d3436;
+}
+
+.btn-checkout {
+    width: 100%;
+    padding: 15px;
+    background: #0984e3;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: 0.3s;
+}
+
+.btn-checkout:hover {
+    background: #74b9ff;
+}
+
+.back-link {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    text-decoration: none;
+    color: #636e72;
+    font-size: 0.9rem;
+}
+
+/* Адаптивность */
+@media (max-width: 850px) {
+    .cart-content {
+        flex-direction: column;
+    }
+    .cart-summary {
+        width: 100%;
+        box-sizing: border-box;
+    }
+}
+/* --- Новые стили для макета с боковой панелью --- */
+body {
+    font-family: sans-serif;
+    background-color: #f4f7f9;
+    margin: 0;
+}
+
+.page-wrapper {
+    display: flex;
+    min-height: 100vh; /* Занимает всю высоту экрана */
+}
+
+.sidebar {
+    width: 200px; /* Ширина левой панели */
+    padding: 30px;
+    background-color: #fff; /* Белый фон, как на изображении */
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+}
+
+.store-nav a {
+    color: #007bff;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.btn-logout {
+    margin-top: 50px; /* Отступ вниз от ссылок */
+    padding: 8px 12px;
+    background-color: transparent;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    color: #555;
+    cursor: pointer;
+    text-align: left;
+}
+
+.main-content {
+    flex-grow: 1; /* Основной контент занимает все оставшееся место */
+    padding: 40px;
+    display: flex;
+    justify-content: center; /* Центрируем контент внутри главной области */
+}
+
+
+/* --- Остальные стили из предыдущего ответа (примеры) --- */
+
+.cart-container {
+    max-width: 900px;
+    width: 100%;
+}
+
+.cart-title {
+    margin-bottom: 25px;
+    font-weight: 600;
+    color: #333;
+}
+
+.checkout-layout {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.checkout-card {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    flex: 1;
+    min-width: 300px;
+}
+/* ... (Остальные стили form-group, summary-line, btn-checkout и т.д. остаются без изменений) ... */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f7f6;
+    margin: 0;
+    padding: 20px;
+}
+
+.orders-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+.orders-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 15px;
+}
+
+.back-link {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: 500;
+}
+
+.orders-table-wrapper {
+    overflow-x: auto;
+}
+
+.orders-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.orders-table th {
+    background-color: #f8f9fa;
+    padding: 15px;
+    color: #666;
+    font-weight: 600;
+    border-bottom: 2px solid #dee2e6;
+}
+
+.orders-table td {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    vertical-align: middle;
+}
+
+.order-id { font-weight: bold; color: #333; }
+.order-date { color: #888; }
+.order-products { max-width: 300px; color: #555; }
+.order-total { font-weight: 600; color: #2ecc71; }
+
+.status {
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.status-completed { background: #e8f5e9; color: #2e7d32; }
+.status-pending { background: #fff3e0; color: #ef6c00; }
+
+@media (max-width: 600px) {
+    .orders-header { flex-direction: column; align-items: flex-start; gap: 10px; }
+}

@@ -1,0 +1,36 @@
+<link rel="stylesheet" href="{{ url_for('static',filename='css/style.css')}}">
+{%extends 'base.html'%}
+{% block title %}
+Store
+{% endblock %}
+{% block content %}
+
+<div class="product-list">
+    {% for item in store%}
+  <div class="product-card">
+    <img src="{{ url_for('static', filename='uploads/' + item.image) }}" width="400">
+    <h3>{{item.name}}</h3>
+      <span class="product-description">{{item.description}}</span>
+    <p class="price">Price: {{item.price}} $</p>
+
+      {% if item.id|string in session.get('cart', []) %}
+    <button class="btn btn-secondary" disabled>Added to cart</button>
+{% else %}
+      {% if session.get('user_id') %}
+    <form action="{{ url_for('add_to_cart', product_id=item.id) }}" style="display:inline;">
+        <button type="submit" class="btn btn-primary">Add to cart</button>
+    </form>
+      {% else %}
+      <button class="btn btn-secondary" disabled>Please login first</button>
+      {% endif %}
+{% endif %}
+      {%if session.get('user_id') == 'admin' %}
+      <form action="{{ url_for('delete', store_id=item.id) }}" method="POST" style="display:inline;">
+        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
+        </form>
+      {%endif%}
+  </div>
+    {%endfor%}
+</div>
+
+{% endblock %}

@@ -1,0 +1,30 @@
+<link rel="stylesheet" href="{{ url_for('static',filename='css/style.css')}}">
+{%extends 'base.html'%}
+{% block title %}
+Cart
+{% endblock %}
+{% block content %}
+<div class="container mt-4" style="max-width: 500px;">
+    <form method="POST" class="p-4 shadow-sm border rounded" enctype="multipart/form-data">
+        <div class="mb-3">
+            <input type="text" name="name" placeholder="Name" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Upload photo</label>
+            <input type="file" name="file_upload" class="form-control">
+        </div>
+
+        <div class="mb-3">
+            <textarea name="description" placeholder="Description" class="form-control" rows="3"></textarea>
+        </div>
+
+        <div class="mb-3">
+            <input type="number" name="price" placeholder="Price" class="form-control" required>
+        </div>
+
+        <button class="btn btn-success w-100" type="submit">Додати товар</button>
+    </form>
+</div>
+
+{% endblock %}
