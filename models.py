@@ -30,4 +30,3 @@ class Orders(db.Model):
     total_price = db.Column(db.Integer, nullable=False)
     date = db.Column(db.DateTime, nullable=False)
     mail = db.Column(db.String(80), nullable=False)
-    db.relationship('User', backref='orders', lazy='dynamic')
